@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Country Guessing Game</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🌍 CountryGuessr</h1>
+    
+    <form action="/guess" method="post">
+        <input type="text" name="country" placeholder="Enter a country" required>
+        <button type="submit">Guess</button>
+        <button type="button" onclick="revealAnswer()">Reveal Answer</button>
+        <a href="/reset"><button type="button">Reset</button></a>
+    </form>
+
+    <div id="guesses">
+        {% for guess in guesses %}
+        <div class="guess" style="background-color: {{ guess.color }};">
+            <img src="{{ guess.flag }}" alt="Flag" class="flag">
+            <span class="country-name">{{ guess.name }}</span>
+            <span class="distance">({{ guess.distance }} units)</span>
+            <span class="arrow">{{ guess.direction }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function revealAnswer() {
+            alert("The correct country was: {{ target }}");
+        }
+    </script>
+</body>
+</html>
